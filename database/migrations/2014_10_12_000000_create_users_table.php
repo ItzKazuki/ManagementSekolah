@@ -15,9 +15,11 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
+            $table->string('nama');
+            $table->string('email');
             $table->timestamp('email_verified_at')->nullable();
+            $table->string('keanggotaan')->default('menunggu_persetujuan'); // ada 4 menunggu_persetujuan, anggota, bendahara, serketaris, wakil & ketua
+            $table->boolean('isAdmin')->default(false); //cuma cek ini admin bukan, buat akses semua permission di web
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();

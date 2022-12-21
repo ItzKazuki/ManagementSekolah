@@ -16,6 +16,7 @@ return [
     */
 
     'name' => env('APP_NAME', 'Laravel'),
+    'version' => env('APP_VERSION', '1.0.0-dev'),
 
     /*
     |--------------------------------------------------------------------------
@@ -210,6 +211,7 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
+        'Session' => Illuminate\Support\Facades\Session::class,
     ])->toArray(),
 
 ];
