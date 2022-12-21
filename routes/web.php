@@ -1,12 +1,15 @@
 <?php
 
-use App\Http\Controllers\Anggota\TampilanAnggotaController;
-use App\Http\Controllers\Auth\ForgotPasswordController;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\Admin\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Anggota\BendaharaController;
+use App\Http\Controllers\Anggota\SekretarisController;
+use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Anggota\TampilanAnggotaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,22 +48,16 @@ Route::middleware(['auth', 'checkAnggota'])->prefix('anggota')->name('anggota.')
 
     Route::group(['middleware' => 'anggotaInti'], function () {
         Route::prefix('kas')->name('kas.')->group(function () {
-            Route::get('/', function () {
-                return "ini buat bendahara";
-            })->name('index');
+            Route::get('/', [BendaharaController::class, 'index'])->name('index');
         });
 
         Route::prefix('manage')->name('manage.')->group(function () {
-            Route::get('/', function () {
-                return "ini buat sekretaris";
-            })->name('index');
+            Route::get('/', [SekretarisController::class, 'index'])->name('index');
         });
     });
 
     Route::middleware('admin')->prefix('admin')->name('admin.')->group(function () {
-        Route::get('/', function () {
-            return "ini buat admin";
-        })->name('index');
+        Route::get('/', [AdminController::class, 'index'])->name('index');
     });
 
     Route::post('logout', [LoginController::class, 'logout'])->name('auth.logout');
